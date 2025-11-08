@@ -122,6 +122,24 @@ export default defineConfig({
 
 Now go to add better auth in our project and then come back to below step
 
+### Add @prisma/client
+
+```pnpm
+pnpm install @prisma/client
+```
+
+### Generate prisma client
+
+```pnpm
+pnpm dlx prisma generate
+```
+
+### Migrate prisma database
+
+```pnpm
+pnpm dlx prisma migrate dev --name tags-model
+```
+
 #### 5️⃣ Run prisma db push
 
 ```pnpm
@@ -181,4 +199,34 @@ Add base URL inside .env file as
 
 ```js
 BETTER_AUTH_URL=http://localhost:3000 # Base URL of your app
+```
+
+### Better Auth instance
+
+Create a file named auth.ts in one of these locations:
+
+- Project root
+- lib/ folder
+- utils/ folder
+
+auth.ts
+
+```ts
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+// If your Prisma file is located elsewhere, you can change the path
+import { PrismaClient } from "@/generated/prisma/client";
+
+const prisma = new PrismaClient();
+export const auth = betterAuth({
+  database: prismaAdapter(prisma, {
+    provider: "sqlite", // or "mysql", "postgresql", ...etc
+  }),
+});
+```
+
+### Database table creation for better auth
+
+```pnpm
+pnpm dlx @better-auth/cli generate
 ```
