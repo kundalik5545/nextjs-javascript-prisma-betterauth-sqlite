@@ -1,36 +1,132 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Project setup Guide
 
-## Getting Started
+This is template file for project setup using
 
-First, run the development server:
+- Nextjs
+- JavaScript
+- Prisma
+- Sqlite
+- shadcn
+- tailwindcss
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Start
+
+### Create nextjs project with this
+
+```pnpm
+pnpm create next-app@latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Initialize github repo and add to project
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+Go to add remote - enter git url - name the project - commit and push
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### Add Shadcn
 
-## Learn More
+This command will add shadcn to our project. It will create components folder then add required components in it.
 
-To learn more about Next.js, take a look at the following resources:
+```pnpm
+pnpm dlx shadcn@latest add button
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Complete home page and layout page setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Home.js page
 
-## Deploy on Vercel
+```js
+export default function Home() {
+  return (
+    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
+      Home Page
+    </div>
+  );
+}
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Layout.js page
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```js
+import { Inter } from "next/font/google";
+import "./globals.css";
+
+const inter = Inter({
+  variable: "--font-inter",
+  subsets: ["latin"],
+});
+
+export const metadata = {
+  title: "Next App Setup",
+  description: "Next.js project setup with Prisma and SQLite and better auth.",
+};
+
+export default function RootLayout({ children }) {
+  return (
+    <html lang="en">
+      <body className={`${inter.className} antialiased`}>{children}</body>
+    </html>
+  );
+}
+```
+
+## Prisma
+
+### Add prisma
+
+Add prisma as dev dependency.
+
+```pnpm
+pnpm install prisma --save-dev
+```
+
+Check prisma CLI
+
+```npx
+pnpm dlx prisma
+```
+
+#### Add prisma for Sqlite
+
+```pnpm
+pnpm dlx prisma init --datasource-provider sqlite --output ../lib/generated/prisma
+```
+
+#### Add prisma for Postgress
+
+```pnpm
+pnpm dlx prisma init --datasource-provider postgresql --output ../lib/generated/prisma
+```
+
+### Setup .env variables
+
+#### Sqlite Database URL
+
+```js
+DATABASE_URL = "file:./dev.db";
+```
+
+#### Postgress Database URL
+
+```js
+DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
+```
+
+```js
+DATABASE_URL =
+  "postgresql://postgres:0807@localhost:5433/better_auth_db?schema=public";
+```
+
+#### Better Auth env varriables
+
+```js
+BETTER_AUTH_BASE_URL = "http://localhost:3000";
+```
+
+```js
+BETTER_AUTH_SECRET = "secrete-code";
+```
+
+#### Resent api key
+
+```js
+RESEND_API_KEY = "";
+```
