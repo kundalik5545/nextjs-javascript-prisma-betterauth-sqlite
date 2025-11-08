@@ -9,15 +9,15 @@ This is template file for project setup using
 - shadcn
 - tailwindcss
 
-## Start
+## 👉 Start
 
-### Create nextjs project with this
+### 🚀 Create nextjs project with this
 
 ```pnpm
 pnpm create next-app@latest
 ```
 
-### Initialize github repo and add to project
+### 🐇... Initialize github repo and add to project
 
 Go to add remote - enter git url - name the project - commit and push
 
@@ -68,7 +68,7 @@ export default function RootLayout({ children }) {
 }
 ```
 
-## Prisma
+## 👉 Prisma
 
 ### Add prisma
 
@@ -104,7 +104,7 @@ pnpm add dotenv
 
 prisma.config.ts
 
-````ts
+```ts
 import { defineConfig, env } from "prisma/config";
 import "dotenv/config";
 
@@ -120,13 +120,21 @@ export default defineConfig({
 });
 ```
 
-## Setup .env variables
+Now go to add better auth in our project and then come back to below step
+
+#### Run prisma db push
+
+```pnpm
+pnpm dlx prisma db pull
+```
+
+## 👉 Setup .env variables
 
 #### Sqlite Database URL
 
 ```js
 DATABASE_URL = "file:./dev.db";
-````
+```
 
 #### Postgress Database URL
 
@@ -155,4 +163,22 @@ BETTER_AUTH_SECRET = "secrete-code";
 RESEND_API_KEY = "";
 ```
 
-##
+## 👉 Add Better auth
+
+To add better auth
+
+```pnpm
+pnpm add better-auth
+```
+
+Add better auth secrete inside .env file
+
+```js
+BETTER_AUTH_SECRET = mXisfTmjHEHaExkLGORoMO5xaiFpq4uu;
+```
+
+Add base URL inside .env file as
+
+```js
+BETTER_AUTH_URL=http://localhost:3000 # Base URL of your app
+```
