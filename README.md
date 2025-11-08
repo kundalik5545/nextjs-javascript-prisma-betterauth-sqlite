@@ -134,6 +134,12 @@ pnpm install @prisma/client
 pnpm dlx prisma generate
 ```
 
+### Run better auth Database table creation for better auth
+
+```pnpm
+pnpm dlx @better-auth/cli generate
+```
+
 ### Migrate prisma database
 
 ```pnpm
@@ -229,4 +235,52 @@ export const auth = betterAuth({
 
 ```pnpm
 pnpm dlx @better-auth/cli generate
+```
+
+## Update the auth.ts file
+
+This is to add email and password authentication
+
+```ts
+import { betterAuth } from "better-auth";
+import { prismaAdapter } from "better-auth/adapters/prisma";
+// If your Prisma file is located elsewhere, you can change the path
+import { PrismaClient } from "@/generated/prisma/client";
+
+const prisma = new PrismaClient();
+export const auth = betterAuth({
+  database: prismaAdapter(prisma, {
+    provider: "sqlite", // or "mysql", "postgresql", ...etc
+  }),
+  emailAndPassword: {
+    enabled: true,
+  },
+});
+```
+
+## API route handler for auth
+
+Create new api folder with catch all routes.
+
+/api/auth/[...all]/route.js
+
+```js
+import { auth } from "@/lib/auth"; // path to your auth file
+import { toNextJsHandler } from "better-auth/next-js";
+
+export const { POST, GET } = toNextJsHandler(auth);
+```
+
+### Create auth-client.js file
+
+Create client instance to access better auth.
+
+/lib/client-auth.js
+
+```js
+import { createAuthClient } from "better-auth/react";
+export const authClient = createAuthClient({
+  /** The base URL of the server (optional if you're using the same domain) */
+  baseURL: "http://localhost:3000",
+});
 ```
