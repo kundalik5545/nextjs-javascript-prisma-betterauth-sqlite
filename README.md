@@ -96,13 +96,37 @@ pnpm dlx prisma init --datasource-provider sqlite --output ../lib/generated/pris
 pnpm dlx prisma init --datasource-provider postgresql --output ../lib/generated/prisma
 ```
 
-### Setup .env variables
+#### Add dotenv and update prisma.config.ts
+
+```pnpm
+pnpm add dotenv
+```
+
+prisma.config.ts
+
+````ts
+import { defineConfig, env } from "prisma/config";
+import "dotenv/config";
+
+export default defineConfig({
+  schema: "prisma/schema.prisma",
+  migrations: {
+    path: "prisma/migrations",
+  },
+  engine: "classic",
+  datasource: {
+    url: env("DATABASE_URL"),
+  },
+});
+```
+
+## Setup .env variables
 
 #### Sqlite Database URL
 
 ```js
 DATABASE_URL = "file:./dev.db";
-```
+````
 
 #### Postgress Database URL
 
@@ -130,3 +154,5 @@ BETTER_AUTH_SECRET = "secrete-code";
 ```js
 RESEND_API_KEY = "";
 ```
+
+##
