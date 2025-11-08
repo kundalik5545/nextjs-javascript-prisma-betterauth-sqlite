@@ -17,11 +17,11 @@ This is template file for project setup using
 pnpm create next-app@latest
 ```
 
-### 🐇... Initialize github repo and add to project
+### 👉 Initialize github repo and add to project
 
 Go to add remote - enter git url - name the project - commit and push
 
-### Add Shadcn
+### 👉 Add Shadcn
 
 This command will add shadcn to our project. It will create components folder then add required components in it.
 
@@ -72,19 +72,19 @@ export default function RootLayout({ children }) {
 
 ### Add prisma
 
-Add prisma as dev dependency.
+#### 1️⃣ Add prisma as dev dependency.
 
 ```pnpm
 pnpm install prisma --save-dev
 ```
 
-Check prisma CLI
+#### 2️⃣ Check prisma CLI
 
 ```npx
 pnpm dlx prisma
 ```
 
-#### Add prisma for Sqlite
+#### 3️⃣ Add prisma for Sqlite
 
 ```pnpm
 pnpm dlx prisma init --datasource-provider sqlite --output ../lib/generated/prisma
@@ -96,7 +96,7 @@ pnpm dlx prisma init --datasource-provider sqlite --output ../lib/generated/pris
 pnpm dlx prisma init --datasource-provider postgresql --output ../lib/generated/prisma
 ```
 
-#### Add dotenv and update prisma.config.ts
+#### 4️⃣ Add dotenv and update prisma.config.ts
 
 ```pnpm
 pnpm add dotenv
@@ -122,7 +122,7 @@ export default defineConfig({
 
 Now go to add better auth in our project and then come back to below step
 
-#### Run prisma db push
+#### 5️⃣ Run prisma db push
 
 ```pnpm
 pnpm dlx prisma db pull
@@ -130,13 +130,13 @@ pnpm dlx prisma db pull
 
 ## 👉 Setup .env variables
 
-#### Sqlite Database URL
+#### 1️⃣ Sqlite Database URL
 
 ```js
 DATABASE_URL = "file:./dev.db";
 ```
 
-#### Postgress Database URL
+#### 2️⃣ Postgress Database URL
 
 ```js
 DATABASE_URL=postgresql://USER:PASSWORD@HOST:PORT/DATABASE?schema=SCHEMA
@@ -147,7 +147,7 @@ DATABASE_URL =
   "postgresql://postgres:0807@localhost:5433/better_auth_db?schema=public";
 ```
 
-#### Better Auth env varriables
+#### 3️⃣ Better Auth env varriables
 
 ```js
 BETTER_AUTH_BASE_URL = "http://localhost:3000";
@@ -157,7 +157,7 @@ BETTER_AUTH_BASE_URL = "http://localhost:3000";
 BETTER_AUTH_SECRET = "secrete-code";
 ```
 
-#### Resent api key
+#### 4️⃣ Resent api key
 
 ```js
 RESEND_API_KEY = "";
