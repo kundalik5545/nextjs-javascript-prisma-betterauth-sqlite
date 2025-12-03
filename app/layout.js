@@ -8,7 +8,7 @@ const inter = Inter({
 
 export const metadata = {
   title: "Next App Setup",
-  description: "Next.js project setup with Prisma and SQLite and better auth.",
+  description: "Next.js project setup with Prisma and PostgreSQL and better auth.",
 };
 
 export default function RootLayout({ children }) {

@@ -284,3 +284,26 @@ export const authClient = createAuthClient({
   baseURL: "http://localhost:3000",
 });
 ```
+
+## Add prisma.js file
+
+To connect with prisma and database create prisma.js file
+
+```js
+import { PrismaClient } from "./generated/prisma/client";
+
+const globalForPrisma = globalThis as unknown as {
+  prisma: PrismaClient | undefined;
+};
+
+export const prisma =
+  globalForPrisma.prisma ??
+  new PrismaClient({
+    log:
+      process.env.NODE_ENV === "development"
+        ? ["query", "error", "warn"]
+        : ["error"],
+  });
+
+if (process.env.NODE_ENV !== "production") globalForPrisma.prisma = prisma;
+```
